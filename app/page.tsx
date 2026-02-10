@@ -12,7 +12,7 @@ import {
   type Schedule,
   type ExecutionLog,
 } from '@/lib/scheduler'
-import { IoAdd, IoSettingsSharp, IoClose, IoTrash, IoRefresh, IoTime, IoMail, IoTrendingUp, IoTrendingDown, IoCheckmark, IoSend, IoChevronDown, IoChevronUp, IoAlertCircle, IoSearch, IoPlay, IoEye } from 'react-icons/io5'
+import { IoAdd, IoSettingsSharp, IoTrash, IoRefresh, IoTime, IoTrendingUp, IoCheckmark, IoSend, IoChevronDown, IoChevronUp, IoAlertCircle, IoSearch, IoPlay, IoEye } from 'react-icons/io5'
 import { HiOutlineChartBar, HiOutlineLightningBolt } from 'react-icons/hi'
 import { MdSchedule } from 'react-icons/md'
 import { CgSpinner } from 'react-icons/cg'
@@ -402,16 +402,40 @@ export default function Home() {
       if (result.success) {
         let text = ''
         const r = result?.response?.result
-        if (typeof r === 'string') {
+        const msg = result?.response?.message
+        if (typeof msg === 'string' && msg.length > 0) {
+          text = msg
+        } else if (typeof r === 'string') {
           text = r
         } else if (r?.response && typeof r.response === 'string') {
           text = r.response
+        } else if (r?.text && typeof r.text === 'string') {
+          text = r.text
         } else if (r?.raw_text && typeof r.raw_text === 'string') {
           text = r.raw_text
         } else {
-          text = extractText(result.response) || JSON.stringify(r)
+          text = extractText(result.response) || ''
         }
-        setAnalysisResult(text)
+        // Last resort: try parsing raw_response if we still have no text
+        if (!text && result.raw_response) {
+          try {
+            const rawParsed = typeof result.raw_response === 'string' ? JSON.parse(result.raw_response) : result.raw_response
+            if (typeof rawParsed?.response === 'string') {
+              text = rawParsed.response
+            } else if (typeof rawParsed === 'string') {
+              text = rawParsed
+            }
+          } catch {
+            if (typeof result.raw_response === 'string') {
+              text = result.raw_response
+            }
+          }
+        }
+        if (text) {
+          setAnalysisResult(text)
+        } else {
+          setAnalysisError('Received empty analysis from agent. Please try again.')
+        }
       } else {
         setAnalysisError(result?.error ?? 'Failed to get analysis from agent.')
       }
