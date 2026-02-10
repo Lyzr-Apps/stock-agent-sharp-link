@@ -1,0 +1,29 @@
+{
+  "agent_id": "698b62de08cfa4d9edb130ee",
+  "agent_name": "Stock Analysis Agent",
+  "test_message": "Analyze the following stocks and provide a morning digest summary: AAPL, MSFT, GOOGL. Include current price movements, technical indicators, news sentiment, and buy/hold/sell recommendations for each. Do NOT send any email, just provide the analysis.",
+  "raw_response": {
+    "raw_text": "# Morning Stock Digest Analysis \u2013 February 10, 2026\n\nBased on available market data, here's a comprehensive analysis of your three holdings:\n\n## Portfolio Overview\n\n| Stock | Current Price | Change | Status |\n|-------|---------------|--------|--------|\n| GOOGL | $324.32 | +0.39% | Stable |\n| AAPL | $278.12 | +0.80% | Slight Strength |\n| MSFT | $401.14 | \u2014 | \u2014 |\n\n---\n\n## Individual Stock Analysis\n\n### **Alphabet Inc. (GOOGL)**\n\n**Current Metrics:**\n- **Price:** $324.32 (as of Feb 9, 2026)[2]\n- **Day Range:** $317.26\u2013$327.70[2]\n- **52-Week Range:** $140.53\u2013$349.00[2]\n- **Market Cap:** $3.92T[2]\n- **P/E Ratio:** 35.26[2]\n\n**Valuation & Fundamentals:**\nGOOGL demonstrates strong financial health with a Return on Equity of **36.02%** and Return on Assets of **25.83%**, significantly outperforming peers[2]. However, the stock trades at a **586% premium** relative to Morningstar's assessed valuation, with current price substantially below the fair value estimate of $731.00[2]. The P/E ratio of 35.26 is elevated compared to Amazon (29.86) and above market averages[2].\n\n**Technical Position:**\nThe stock is trading near the middle of its daily range and approaches its 52-week high of $349.00, indicating strength but also suggesting limited upside before potential resistance[2].\n\n**Recommendation: HOLD** \u2014 The strong fundamental metrics and elevated ROE/ROA ratios support the valuation, but the premium pricing limits near-term upside. Wait for pullback to $310-315 for additional accumulation opportunities.\n\n---\n\n### **Apple Inc. (AAPL)**\n\n**Current Metrics:**\n- **Price:** $278.12[1]\n- **Change:** +0.80%[1]\n\n**Assessment:**\nThe search results provide limited data for Apple. AAPL shows modest positive momentum (+0.80%), but comprehensive technical indicators, volume analysis, and recent news sentiment are unavailable to provide a full recommendation.\n\n**Recommendation: HOLD** \u2014 Based on limited data, maintain current position pending fuller market analysis with more complete data sources.\n\n---\n\n### **Microsoft Corp. (MSFT)**\n\n**Current Metrics:**\n- **Price:** $401.14[1]\n\n**Assessment:**\nInsufficient data provided in search results for detailed technical and fundamental analysis.\n\n**Recommendation: HOLD** \u2014 Maintain position pending additional market data and analysis.\n\n---\n\n## Key Limitations\n\nThe search results provided lack critical information for a comprehensive morning digest:\n- **Technical indicators unavailable:** RSI, MACD, moving averages, and other momentum signals for all three stocks\n- **Recent news & sentiment:** No earnings announcements, regulatory updates, or market-moving news included\n- **Volume analysis:** Only partial volume data; unusual activity not assessed\n- **Analyst ratings & price targets:** Not included in results\n- **Broader market context:** Limited S&P 500, NASDAQ, and sector trend data\n\n**Recommendation:** For actionable buy/sell signals with higher confidence, source real-time technical data, earnings calendars, and current news sentiment analysis before market open."
+  },
+  "field_types": {
+    "raw_text": "string (markdown-formatted text containing the full stock analysis)"
+  },
+  "response_format": "text",
+  "notes": "This agent uses Perplexity sonar-reasoning-pro which returns plain markdown text, NOT structured JSON. The response is wrapped in a { raw_text: string } object. The UI should render the raw_text field as markdown. The markdown contains: (1) a portfolio overview table with stock prices and changes, (2) individual stock analysis sections with metrics, valuation, technicals, and recommendations, (3) a limitations/caveats section. Each stock section includes a HOLD/BUY/SELL recommendation. The UI generator should use a markdown renderer (e.g., react-markdown) to display this content.",
+  "status": "passed",
+  "timestamp": "2026-02-10T16:56:25.426926",
+  "parsed_structure": {
+    "description": "The markdown response has a consistent structure that can be parsed if needed",
+    "sections": [
+      "Portfolio Overview (table with Stock, Current Price, Change, Status columns)",
+      "Individual Stock Analysis (one subsection per ticker with Current Metrics, Assessment/Valuation, Technical Position, Recommendation)",
+      "Key Limitations (list of data gaps)"
+    ],
+    "stocks_analyzed": ["GOOGL", "AAPL", "MSFT"],
+    "recommendations_found": {
+      "GOOGL": "HOLD",
+      "AAPL": "HOLD",
+      "MSFT": "HOLD"
+    }
+  }
+}

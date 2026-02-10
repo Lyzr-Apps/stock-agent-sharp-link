@@ -1,0 +1,52 @@
+{
+  "app_name": "Stock Analysis Morning Digest",
+  "pattern": "single_agent_with_scheduler",
+  "agents": [
+    {
+      "agent_id": "698b62de08cfa4d9edb130ee",
+      "name": "Stock Analysis Agent",
+      "type": "text",
+      "provider": "perplexity",
+      "model": "perplexity/sonar-reasoning-pro",
+      "temperature": 0.3,
+      "top_p": 1,
+      "tools": ["GMAIL_SEND_EMAIL"],
+      "has_knowledge_base": false,
+      "has_image_output": false,
+      "has_voice": false,
+      "has_file_output": false
+    }
+  ],
+  "agent_ids": ["698b62de08cfa4d9edb130ee"],
+  "schedules": [
+    {
+      "schedule_id": "698b62f0ebe6fd87d1dcc0cd",
+      "agent_id": "698b62de08cfa4d9edb130ee",
+      "cron_expression": "0 7 * * *",
+      "timezone": "America/New_York",
+      "message": "Analyze my stock portfolio and send the morning digest email. Stocks: AAPL, GOOGL, MSFT, AMZN, TSLA. Send to: user@email.com",
+      "is_active": true,
+      "next_run_time": "2026-02-11T07:00:00-05:00",
+      "max_retries": 2,
+      "retry_delay": 300
+    }
+  ],
+  "schedule_ids": ["698b62f0ebe6fd87d1dcc0cd"],
+  "workflow": {
+    "nodes": [
+      {"id": "input_node", "type": "Input", "label": "Scheduled Trigger (Daily 7AM)", "nodeCategory": "input"},
+      {"id": "stock_analysis_agent", "type": "Agent", "label": "Stock Analysis Agent", "nodeCategory": "agent"},
+      {"id": "output_node", "type": "Output", "label": "Email Digest Sent", "nodeCategory": "end"}
+    ],
+    "edges": [
+      {"source": "input_node", "target": "stock_analysis_agent"},
+      {"source": "stock_analysis_agent", "target": "output_node"}
+    ]
+  },
+  "response_schemas": [
+    {
+      "agent_id": "698b62de08cfa4d9edb130ee",
+      "schema_file": "/app/nextjs-project/response_schemas/stock_analysis_agent_response.json"
+    }
+  ]
+}
